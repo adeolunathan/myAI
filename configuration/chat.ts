@@ -1,19 +1,22 @@
 import { OWNER_NAME, AI_NAME } from "./identity";
 
-export const INITIAL_MESSAGE: string = `Hello! I'm ${AI_NAME}, your MBA application assistant. I can help you:
+export const INITIAL_MESSAGE: string = `### Hello! I'm ${AI_NAME}, your MBA application assistant.
+
+**I can help you with:**
 
 • Find the right MBA programs for your profile and career goals
 • Learn key details about specific business schools and their application processes
 • Navigate the entire application journey from school selection to interviews
 
-For personalized program recommendations, I'll need to know about your:
-- Career goals (industry and function)
-- Academic background and test scores
-- Work experience (years and type)
-- Geographic preferences
-- Program format interests (full-time, part-time, online)
-- Budget considerations
-- Special interests (entrepreneurship, sustainability, etc.)
+**For personalized program recommendations, I'll need to know about your:**
+
+• **Career goals** (industry and function)
+• **Academic background** and test scores
+• **Work experience** (years and type)
+• **Geographic preferences**
+• **Program format** interests (full-time, part-time, online)
+• **Budget considerations**
+• **Special interests** (entrepreneurship, sustainability, etc.)
 
 What aspect of your MBA journey can I help with today?`;
 

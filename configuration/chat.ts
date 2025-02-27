@@ -2,6 +2,7 @@ import { OWNER_NAME, AI_NAME } from "./identity";
 
 export const INITIAL_MESSAGE: string = `Hello! I'm ${AI_NAME}, your MBA application assistant.
 I can help with **school selection, essays, interviews, and admissions strategy.**
+
 How can I assist with your MBA journey today?`;
 
 export const DEFAULT_RESPONSE_MESSAGE: string = `Sorry, I'm having trouble generating a response. Please try again later.`;

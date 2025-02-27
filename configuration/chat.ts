@@ -1,18 +1,7 @@
 import { OWNER_NAME, AI_NAME } from "./identity";
 
-export const INITIAL_MESSAGE: string = `Hello! I'm ${AI_NAME}, your MBA Strategy Partner.
-  
-I can help with **school selection, essays, interviews, and admissions strategy.** 
-
-**To recommend the best programs, I need to know:**  
-• **Career goals** (industry and function)  
-• **Academic background** and test scores  
-• **Work experience** (years and type)  
-• **Geographic preferences**  
-• **Program format** (full-time, part-time, online)  
-• **Budget considerations**  
-• **Special interests** (entrepreneurship, sustainability, etc.)  
-
+export const INITIAL_MESSAGE: string = `Hello! I'm ${AI_NAME}, your MBA application assistant.
+I can help with **school selection, essays, interviews, and admissions strategy.**
 How can I assist with your MBA journey today?`;
 
 export const DEFAULT_RESPONSE_MESSAGE: string = `Sorry, I'm having trouble generating a response. Please try again later.`;

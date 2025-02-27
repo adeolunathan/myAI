@@ -2,10 +2,7 @@ import { OWNER_NAME, AI_NAME } from "./identity";
 
 export const INITIAL_MESSAGE: string = `Hello! I'm ${AI_NAME}, your MBA application assistant.
   
-**I can help you with:**  
-• Find the right MBA programs based on your profile and goals  
-• Learn about business schools and their application processes  
-• Navigate the application journey from selection to interviews  
+I can help with **school selection, essays, interviews, and admissions strategy.** 
 
 **To recommend the best programs, I need to know:**  
 • **Career goals** (industry and function)  

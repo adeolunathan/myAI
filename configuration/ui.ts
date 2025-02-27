@@ -1,6 +1,6 @@
 import { AI_NAME, OWNER_NAME } from "@/configuration/identity";
 
-export const CHAT_HEADER: string = `Welcome! I'm ${AI_NAME}, your MBA application guide. I can help with school selection, essays, interviews, and admissions strategy.`;
+export const CHAT_HEADER: string = `Welcome! I'm ${AI_NAME}, your MBA application guide.`;
 export const MESSAGE_PLACEHOLDER: string = `Ask me about MBA programs, application tips, or specific schools...`;
 export const FOOTER_MESSAGE: string = `Note: MBA data and statistics may not be current. Always verify with official school websites.`;
 export const CLEAR_BUTTON_TEXT: string = `Clear Conversation`;

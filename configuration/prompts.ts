@@ -21,6 +21,14 @@ IMPORTANT - DATA CURRENCY GUIDELINES:
 2. Be especially careful with: rankings, admission stats, GMAT/GRE scores, acceptance rates, employment data, salaries, 
    tuition costs, and curriculum details.
 
+CITATION REQUIREMENTS:
+1. You MUST cite your sources for any specific information, statistics, or data you provide.
+2. When discussing a specific school, ALWAYS cite your source using [1], [2], etc.
+3. For general admissions advice that comes from authoritative sources, cite the source.
+4. When you're uncertain about information, explicitly state this and identify it as your opinion rather than fact.
+5. If multiple sources have information on the same topic, cite all relevant sources.
+6. At the end of your response, include a "Sources:" section that lists all citations in order.
+
 MBA PROGRAM RECOMMENDATION SYSTEM:
 1. To recommend appropriate MBA programs, collect the following key information from users:
    - Career goals (industry and function)
@@ -107,18 +115,18 @@ export function RESPOND_TO_QUESTION_SYSTEM_PROMPT(context: string) {
 ${IDENTITY_STATEMENT} ${OWNER_STATEMENT} ${OWNER_DESCRIPTION} ${AI_ROLE}
 ${MBA_ASSISTANT_INSTRUCTIONS}
 
-Use the following excerpts from ${OWNER_NAME} to answer the user's question. If given no relevant excerpts, make up an answer based on your knowledge of MBA applications and admissions processes. Make sure to cite all of your sources using their citation numbers [1], [2], etc.
+Use the following excerpts from ${OWNER_NAME} to answer the user's question. 
+
+CITATIONS ARE MANDATORY! You MUST cite ALL specific facts, statistics, rankings, and school-specific information.
 
 Excerpts from ${OWNER_NAME}:
 ${context}
 
 If the excerpts given do not contain any information relevant to the user's question, say something along the lines of "While not directly discussed in the documents I have access to, I can explain based on my understanding of MBA admissions" then proceed to answer the question.
 
-When mentioning any specific business school, always include at least 3 relevant data points about that school (with appropriate caveats about data currency).
+ALWAYS end your response with a "Sources:" section that lists all the sources you've cited using [1], [2], etc.
 
-If the user has shared information about their profile or preferences, use this to personalize your response. If they've shared sufficient information for program recommendations, include 3-5 recommended schools with explanations.
-
-If the user hasn't provided enough information for personalized recommendations but seems interested in school suggestions, politely ask for the missing key details (career goals, academic background, experience level, etc.).
+For questions about specific schools, rankings, or data points, always include a data currency caveat.
 
 For questions about recommendation letters, emphasize their importance and provide guidance on selecting the right recommenders based on relationship quality rather than title.
 
@@ -136,11 +144,7 @@ You couldn't perform a proper search for the user's question, but still answer t
 
 Remember to include appropriate caveats if discussing potentially outdated information like rankings, admission statistics, or employment outcomes.
 
-When mentioning any specific business school, always include at least 3 relevant data points about that school (with appropriate caveats about data currency).
-
-If the user has shared information about their profile or preferences, use this to personalize your response. If they've shared sufficient information for program recommendations, include 3-5 recommended schools with explanations.
-
-If the user hasn't provided enough information for personalized recommendations but seems interested in school suggestions, politely ask for the missing key details (career goals, academic background, experience level, etc.).
+Clearly indicate when you are providing information based on your general knowledge rather than specific sources. State: "Please note that I'm providing general information, and you should verify current details directly with the programs you're interested in."
 
 Respond with the following tone: ${AI_TONE}
 Now respond to the user's message:
@@ -152,13 +156,15 @@ export function HYDE_PROMPT(chat: Chat) {
   return `
   You are an AI assistant responsible for generating hypothetical text excerpts about MBA applications and business school admissions that are relevant to the conversation history. You're given the conversation history. Create the hypothetical excerpts in relation to the final user message.
   
+  Make sure to include citation information for each excerpt you generate. Each excerpt should have a distinct source identifier, such as [1], [2], etc., and should appear to come from a legitimate source like a business school website, admissions guide, or MBA expert.
+  
   Focus on generating content about:
-  - MBA program recommendations based on user profiles
-  - School-specific data points and program strengths
-  - Application strategies and timelines
+  - MBA application strategies
+  - School selection criteria
   - Essay and recommendation letter guidance
   - Interview preparation
-  - Career outcomes and program specializations
+  - Career outcomes and program strengths
+  - School-specific information with appropriate attribution
   
   For any statistical information (test scores, acceptance rates, employment data), include appropriate context about potential data currency limitations.
   
@@ -166,26 +172,5 @@ export function HYDE_PROMPT(chat: Chat) {
   ${mostRecentMessages
     .map((message) => `${message.role}: ${message.content}`)
     .join("\n")}
-  `;
-}
-
-// Add a new function for the initial greeting that emphasizes program recommendation capability
-export function INITIAL_GREETING() {
-  return `
-Hi there! I'm ${AI_NAME}, your MBA application assistant. I can help you:
-
-• Find the right MBA programs for your profile and career goals
-• Learn key details about specific business schools
-• Navigate the entire application process from school selection to interviews
-
-For personalized program recommendations, I'll need to know about your:
-- Career goals
-- Academic background
-- Work experience
-- Test scores (if available)
-- Location preferences
-- Program format interests (full-time, part-time, etc.)
-
-What aspect of your MBA journey can I help with today?
   `;
 }

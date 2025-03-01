@@ -1,5 +1,4 @@
 "use client";
-
 import { Input } from "@/components/ui/input";
 import { PromptSuggestions } from "./promptSuggestions";
 import { Button } from "@/components/ui/button";
@@ -23,18 +22,35 @@ export default function ChatInput({
   isLoading,
 }: ChatInputProps) {
   const [isFocused, setIsFocused] = useState(false);
+  const [showSuggestions, setShowSuggestions] = useState(true);
+  
   const form = useForm({
     defaultValues: {
       message: "",
     },
   });
   
-  <PromptSuggestions onSuggestionClick={(suggestion) => setInput(suggestion)} />
-
+  // Handle suggestion clicks by simulating an input change event
+  const handleSuggestionClick = (suggestion: string) => {
+    const event = {
+      target: { value: suggestion },
+    } as React.ChangeEvent<HTMLInputElement>;
+    
+    handleInputChange(event);
+    setShowSuggestions(false); // Hide suggestions after one is selected
+  };
+  
   return (
     <>
       <div className="z-10 flex flex-col justify-center items-center fixed bottom-0 w-full p-5 bg-white shadow-[0_-10px_15px_-2px_rgba(255,255,255,1)] text-base">
         <div className="max-w-screen-lg w-full">
+          {/* Show suggestions above the input if they're visible */}
+          {showSuggestions && input.trim() === "" && (
+            <div className="mb-3">
+              <PromptSuggestions onSuggestionClick={handleSuggestionClick} />
+            </div>
+          )}
+          
           <Form {...form}>
             <form
               onSubmit={handleSubmit}
@@ -50,10 +66,20 @@ export default function ChatInput({
                     <FormControl>
                       <Input
                         {...field}
-                        onChange={handleInputChange}
+                        onChange={(e) => {
+                          handleInputChange(e);
+                          if (e.target.value.trim() === "") {
+                            setShowSuggestions(true);
+                          }
+                        }}
                         value={input}
                         className="border-none focus-visible:ring-0 focus-visible:ring-offset-0 bg-transparent"
-                        onFocus={() => setIsFocused(true)}
+                        onFocus={() => {
+                          setIsFocused(true);
+                          if (input.trim() === "") {
+                            setShowSuggestions(true);
+                          }
+                        }}
                         onBlur={() => setIsFocused(false)}
                         placeholder="Type your message here..."
                       />

@@ -31,7 +31,7 @@ export default function ChatHeader({
             variant="outline"
             size="sm"
           >
-            <EraserIcon className="w-4 h-4" />
+            <Trash2Icon className="w-4 h-4" />
             <span>{CLEAR_BUTTON_TEXT}</span>
           </Button>
         </div>

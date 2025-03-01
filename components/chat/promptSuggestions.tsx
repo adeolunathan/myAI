@@ -21,9 +21,9 @@ export const PromptSuggestions: React.FC<PromptSuggestionsProps> = ({
   onSuggestionClick 
 }) => {
   return (
-    <div className="w-full">
+    <div className="w-full flex flex-col items-center">
       <p className="text-sm text-muted-foreground mb-2">Try asking about:</p>
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap justify-center gap-2">
         {MBA_PROMPT_SUGGESTIONS.map((suggestion, index) => (
           <button
             key={index}

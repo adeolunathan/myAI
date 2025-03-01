@@ -30,13 +30,22 @@ export default function ChatInput({
     },
   });
   
-  // Handle suggestion clicks by simulating an input change event
+  // Handle suggestion clicks by directly sending the message
   const handleSuggestionClick = (suggestion: string) => {
+    // First update the input value
     const event = {
       target: { value: suggestion },
     } as React.ChangeEvent<HTMLInputElement>;
-    
     handleInputChange(event);
+    
+    // Then submit the form with the suggestion
+    setTimeout(() => {
+      const formEvent = {
+        preventDefault: () => {},
+      } as React.FormEvent<HTMLFormElement>;
+      handleSubmit(formEvent);
+    }, 10); // Small timeout to ensure input is updated first
+    
     setShowSuggestions(false); // Hide suggestions after one is selected
   };
   
@@ -46,7 +55,7 @@ export default function ChatInput({
         <div className="max-w-screen-lg w-full">
           {/* Show suggestions above the input if they're visible */}
           {showSuggestions && input.trim() === "" && (
-            <div className="mb-3">
+            <div className="mb-3 w-full">
               <PromptSuggestions onSuggestionClick={handleSuggestionClick} />
             </div>
           )}

@@ -13,6 +13,8 @@ interface ChatInputProps {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   input: string;
   isLoading: boolean;
+  // Add a direct message submission prop
+  sendMessage?: (message: string) => void;
 }
 
 export default function ChatInput({
@@ -20,6 +22,8 @@ export default function ChatInput({
   handleSubmit,
   input,
   isLoading,
+  // Provide a default implementation if not provided
+  sendMessage = undefined,
 }: ChatInputProps) {
   const [isFocused, setIsFocused] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(true);
@@ -32,21 +36,36 @@ export default function ChatInput({
   
   // Handle suggestion clicks by directly sending the message
   const handleSuggestionClick = (suggestion: string) => {
-    // First update the input value
-    const event = {
+    // If we have a direct sendMessage function, use it
+    if (sendMessage) {
+      sendMessage(suggestion);
+      setShowSuggestions(false);
+      return;
+    }
+    
+    // Otherwise fall back to updating the input and submitting the form
+    // First update the input field value
+    const inputEvent = {
       target: { value: suggestion },
     } as React.ChangeEvent<HTMLInputElement>;
-    handleInputChange(event);
     
-    // Then submit the form with the suggestion
+    handleInputChange(inputEvent);
+    
+    // Give a slight delay for the state to update
     setTimeout(() => {
-      const formEvent = {
+      // Create a custom form event
+      const customEvent = {
         preventDefault: () => {},
-      } as React.FormEvent<HTMLFormElement>;
-      handleSubmit(formEvent);
-    }, 10); // Small timeout to ensure input is updated first
+        currentTarget: {
+          reset: () => {},
+        },
+      } as unknown as React.FormEvent<HTMLFormElement>;
+      
+      // Call the handleSubmit function with our custom event
+      handleSubmit(customEvent);
+    }, 50);
     
-    setShowSuggestions(false); // Hide suggestions after one is selected
+    setShowSuggestions(false);
   };
   
   return (

@@ -1,6 +1,7 @@
 "use client";
 
 import { Input } from "@/components/ui/input";
+import { PromptSuggestions } from "./promptSuggestions";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { ArrowUp } from "lucide-react";
@@ -27,6 +28,8 @@ export default function ChatInput({
       message: "",
     },
   });
+  
+  <PromptSuggestions onSuggestionClick={(suggestion) => setInput(suggestion)} />
 
   return (
     <>
